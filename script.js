@@ -10,7 +10,7 @@ function nth_ocurrence(str, needle, nth) {
 }
 
 function createTyper(url, selector, delay) {
-    var multiplier = 20;
+    var multiplier = 40;
     var maxlen = 100;
     req = new XMLHttpRequest();
     req.onload = function () {

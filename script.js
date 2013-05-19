@@ -5,13 +5,15 @@ function createTyper(url, selector, delay) {
         var lineNo = 0;
         var typer = function () {
             elem = $(selector)
-            // Get the new line in
-            if (lineNo >= lines.length) {
-                lineNo = 0;
+            // Get the new lines in
+            for (var i = 0; i < 10; i++) {
+                if (lineNo >= lines.length) {
+                    lineNo = 0;
+                }
+                var newline = lines[lineNo].replace("<", "&lt;").replace(">", "&gt;")
+                elem.append(newline + "\n");
+                lineNo = lineNo + 1;
             }
-            var newline = lines[lineNo].replace("<", "&lt;").replace(">", "&gt;")
-            elem.append(newline + "\n");
-            lineNo = lineNo + 1;
             
             // Don't overflow.
             linecount = ( elem.text().match(/\n/g) || [] ).length
@@ -23,7 +25,7 @@ function createTyper(url, selector, delay) {
             // Scroll to the bottom
             $("html, body").scrollTop( $("html, body").scrollTop() + 9999 );
         }
-        setInterval(typer, delay);
+        setInterval(typer, delay*10);
     }
     req.open("get", url, true);
     req.send();
